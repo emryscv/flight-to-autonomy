@@ -91,7 +91,7 @@ export default function AdminCreate() {
                 {/* submit */}
                 <div className="pt-2">
                     <button
-                        onClick={submit}
+                        type="submit"
                         disabled={!canSubmit}
                         className="bg-primary text-primary-foreground px-6 py-2.5 rounded-md text-xs uppercase tracking-widest font-bold
                hover:bg-accent hover:text-black transition-colors disabled:opacity-30 disabled:cursor-not-allowed"

@@ -25,7 +25,7 @@ export default async function App() {
 
           <div className="grid grid-cols-3 gap-6 md:gap-8">
             {posts.map(post => (
-              <PostCard key={post.id} post={post} onClick={() => { }/*() => onSelect(post.id)*/} />
+              <PostCard key={post.id} post={post} />
             ))}
           </div>
         )}
