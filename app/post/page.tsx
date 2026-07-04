@@ -9,7 +9,6 @@ export default function PostDetail() {
     return (
         <div className="max-w-2xl mx-auto px-6 py-12">
             <button
-                onClick={onBack}
                 className="flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground hover:text-accent transition-colors mb-10"
                 style={{ fontFamily: "'Saira Condensed', sans-serif" }}>
                 <ArrowLeft className="w-3.5 h-3.5" />
