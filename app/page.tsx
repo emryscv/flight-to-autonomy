@@ -23,7 +23,7 @@ export default async function App() {
           </div>
         ) : (
 
-          <div className="grid grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {posts.map(post => (
               <PostCard key={post.id} post={post} />
             ))}
