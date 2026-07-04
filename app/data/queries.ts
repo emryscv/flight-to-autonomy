@@ -24,5 +24,5 @@ export async function getPostById(id: string) {
 }
 
 export async function createPost(post: PostType){
-    await sql`INSERT INTO posts (date, title, content, author) VALUES (${post.date}, ${post.title}, ${post.content}, ${post.author})`;
+    await sql`INSERT INTO post(date, title, content, author, estimated_read_time) VALUES (${post.date}, ${post.title}, ${post.content}, ${post.author}, ${post.estimated_read_time})`;
 }

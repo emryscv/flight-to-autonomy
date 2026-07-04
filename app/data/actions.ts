@@ -2,6 +2,8 @@
 
 import { signIn, signOut } from '@/auth';
 import { AuthError } from 'next-auth';
+import { PostType } from './types';
+import { createPost } from './queries';
 
 export async function authenticate(
     prevState: string | undefined,
@@ -28,4 +30,27 @@ export async function authenticate(
 
 export async function signOutAction() {
     await signOut({ redirectTo: '/' });
+}
+
+export async function createPostAction(formData: FormData) {
+    const date = formData.get('date') as string;
+    const title = formData.get('title') as string;
+    const content = formData.get('content') as string;
+    const author = formData.get('author') as string;
+
+    const post: PostType = {
+        id: "-1",
+        date,
+        title,
+        content,
+        author,
+        estimated_read_time: Math.max(1, Math.round(content.split(/\s+/).length / 200)),
+    };
+
+    try {
+        await createPost(post);
+    } catch (error) {
+        console.error("Error creating post:", error);
+        throw error;
+    }
 }

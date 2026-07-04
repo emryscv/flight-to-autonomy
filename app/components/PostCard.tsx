@@ -1,6 +1,6 @@
 import { Calendar, Clock } from "lucide-react";
 import { PostType } from "../data/types";
-import { formatDate, estimateReadTime } from "../helpers";
+import { formatDate } from "../helpers";
 
 export function PostCard({ post }: { post: PostType }) {
     return (

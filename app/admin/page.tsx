@@ -1,18 +1,15 @@
 "use client";
 import { useState } from "react";
-import { ArrowLeft, LogOut, Plus, X } from "lucide-react";
-import { PostType } from "../data/types";
-import { estimateReadTime } from "../helpers";
-import { signOutAction } from "../data/actions";
+import { LogOut, Plus } from "lucide-react";
+import { createPostAction, signOutAction } from "../data/actions";
 
 export default function AdminCreate() {
-
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
+    const [author, setAuthor] = useState("");
     const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
 
-
-    const canSubmit = title.trim().length > 0 && body.trim().length > 0;
+    const canSubmit = title.trim().length > 0 && body.trim().length > 0 && author.trim().length > 0;
 
     return (
         <div className="mx-auto px-6 py-12 max-w-2xl">
@@ -25,7 +22,7 @@ export default function AdminCreate() {
                         New Log Entry
                     </span>
                 </div>
-                
+
                 <form
                     action={signOutAction}
                 >
@@ -38,29 +35,57 @@ export default function AdminCreate() {
                 </form>
             </div>
 
-            <form className="space-y-5">
-                {/* date */}
-                <div>
-                    <label className="block text-xs uppercase tracking-widest text-muted-foreground mb-1.5"
-                        style={{ fontFamily: "'Saira Condensed', sans-serif" }}>
-                        Date
-                    </label>
-                    <input
-                        type="date"
-                        value={date}
-                        onChange={e => setDate(e.target.value)}
-                        className="bg-input-background border border-border rounded-md px-4 py-2.5 text-sm font-mono outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-colors w-48"
-                    />
+            <form
+                className="space-y-5"
+                action={createPostAction}
+            >
+                <div className="grid grid-cols-3 gap-4">
+                    <div className="col-span-1">
+                        <label className="block text-xs uppercase tracking-widest text-muted-foreground mb-1.5"
+                            style={{ fontFamily: "'Saira Condensed', sans-serif" }}
+                            htmlFor="date"
+                        >
+                            Date
+                        </label>
+                        <input
+                            type="date"
+                            id="date"
+                            name="date"
+                            value={date}
+                            onChange={e => setDate(e.target.value)}
+                            className="bg-input-background border border-border rounded-md px-4 py-2.5 text-sm font-mono outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-colors w-48"
+                        />
+                    </div>
+
+                    <div className="col-span-2">
+                        <label className="block text-xs uppercase tracking-widest text-muted-foreground mb-1.5"
+                            style={{ fontFamily: "'Saira Condensed', sans-serif" }}
+                            htmlFor="author">
+                            Author
+                        </label>
+                        <input
+                            type="text"
+                            id="author"
+                            name="author"
+                            value={author}
+                            onChange={e => setAuthor(e.target.value)}
+                            placeholder="Author name..."
+                            className="w-full bg-input-background border border-border rounded-md px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-colors"
+                            style={{ fontFamily: "'Rajdhani', sans-serif" }}
+                        />
+                    </div>
                 </div>
 
-                {/* title */}
                 <div>
                     <label className="block text-xs uppercase tracking-widest text-muted-foreground mb-1.5"
-                        style={{ fontFamily: "'Saira Condensed', sans-serif" }}>
+                        style={{ fontFamily: "'Saira Condensed', sans-serif" }}
+                        htmlFor="title">
                         Title
                     </label>
                     <input
                         type="text"
+                        id="title"
+                        name="title"
                         value={title}
                         onChange={e => setTitle(e.target.value)}
                         placeholder="Entry title..."
@@ -69,16 +94,18 @@ export default function AdminCreate() {
                     />
                 </div>
 
-                {/* body */}
                 <div>
                     <label className="block text-xs uppercase tracking-widest text-muted-foreground mb-1.5"
-                        style={{ fontFamily: "'Saira Condensed', sans-serif" }}>
+                        style={{ fontFamily: "'Saira Condensed', sans-serif" }}
+                        htmlFor="content">
                         Body
                         <span className="ml-2 text-muted-foreground/60 normal-case tracking-normal">
                             (blank line = new paragraph, "- item" = list)
                         </span>
                     </label>
                     <textarea
+                        id="content"
+                        name="content"
                         value={body}
                         onChange={e => setBody(e.target.value)}
                         placeholder="Write your log entry here..."
@@ -88,7 +115,6 @@ export default function AdminCreate() {
                     />
                 </div>
 
-                {/* submit */}
                 <div className="pt-2">
                     <button
                         type="submit"
