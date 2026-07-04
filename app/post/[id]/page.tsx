@@ -9,12 +9,13 @@ export default async function PostDetail({ params }: { params: { id: string } })
 
     return (
         <div className="max-w-2xl mx-auto px-6 py-12">
-            <button
+            <a
+                href="/"
                 className="flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground hover:text-accent transition-colors mb-10"
                 style={{ fontFamily: "'Saira Condensed', sans-serif" }}>
                 <ArrowLeft className="w-3.5 h-3.5" />
                 Back to Logbook
-            </button>
+            </a>
 
             <div className="flex items-center justify-between mb-6 text-xs font-mono text-muted-foreground">
                 <span className="flex items-center gap-1.5">
@@ -26,12 +27,14 @@ export default async function PostDetail({ params }: { params: { id: string } })
                     {post.estimated_read_time} min read
                 </span>
             </div>
-
-            <h1
-                className="font-black uppercase tracking-wide text-accent leading-tight mb-8"
-                style={{ fontFamily: "'Orbitron', monospace", fontSize: "1.05rem" }}>
-                {post.title}
-            </h1>
+            <div className="flex justify-between">
+                <h1
+                    className="font-black uppercase tracking-wide text-accent leading-tight mb-8"
+                    style={{ fontFamily: "'Orbitron', monospace", fontSize: "1.05rem" }}>
+                    {post.title}
+                </h1>
+                <p>{post.author}</p>
+            </div>
 
             <div className="space-y-5">
                 {post.content.split("\n\n").map((para, i) => (

@@ -26,7 +26,13 @@ export function PostCard({ post }: { post: PostType }) {
             <p
                 className="text-sm text-muted-foreground leading-relaxed line-clamp-2"
                 style={{ fontFamily: "'Rajdhani', sans-serif", fontWeight: 400 }}>
-                {post.content.substring(0, 100)}{post.content.length > 100 ? "..." : ""}
+                {post.content.substring(0, 200)}{post.content.length > 200 ? "..." : ""}
+            </p>
+
+            <p
+                className="text-sm text-muted-foreground leading-relaxed line-clamp-2 float-right"
+                style={{ fontFamily: "'Rajdhani', sans-serif", fontWeight: 800 }}>
+                {post.author}
             </p>
         </a>
     );
