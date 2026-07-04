@@ -11,7 +11,7 @@ const STORAGE_KEY = "drone-blog-posts";
 
 export default function App() {
   const [posts, setPosts] = useState<Post[]>(SEED_POSTS);
-
+  
   /*const currentPost =
     view.page === "post" ? posts.find(p => p.id === view.id) : null;*/
   const sorted: Post[] = [...posts].sort((a, b) => b.date.localeCompare(a.date));

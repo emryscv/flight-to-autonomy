@@ -1,6 +1,8 @@
 import { formatDate } from "../helpers";
 import { Post } from "../data/types";
 import { Calendar, ArrowLeft, Clock, Tag } from "lucide-react";
+import bcrypt from "bcrypt";
+
 
 export default function PostDetail() {
     const post: Post = { id: "1", title: "Sample Post", date: "2024-06-01", readTime: 5, body: "This is a sample post body.\n\n- First point\n- Second point", tags: ["sample", "post"] };

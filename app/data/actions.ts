@@ -1,3 +1,5 @@
+"use server";
+
 import { signIn, signOut } from '@/auth';
 import { AuthError } from 'next-auth';
 
@@ -9,7 +11,7 @@ export async function authenticate(
         await signIn('credentials', {
             email: formData.get('email'),
             password: formData.get('password'),
-            redirectTo: '/dashboard',
+            redirectTo: '/admin',
         });
     } catch (error) {
         if (error instanceof AuthError) {
