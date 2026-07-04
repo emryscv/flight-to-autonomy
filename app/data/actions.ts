@@ -25,6 +25,5 @@ export async function authenticate(
 }
 
 export async function signOutAction() {
-    'use server';
     await signOut({ redirectTo: '/' });
 }
