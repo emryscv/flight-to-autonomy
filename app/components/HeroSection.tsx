@@ -9,9 +9,9 @@ export default function HeroSection() {
                     Emrys Cruz Viera // CAPSTONE PROJECT 2026
                 </div>
                 <HudTitle>
-                    <span className="text-white text-4xl">Autonomous</span>
+                    <span className="text-white text-2xl sm:text-4xl">Autonomous</span>
                     <br />
-                    <span className="text-accent text-4xl">Drone Build</span>
+                    <span className="text-accent text-2xl sm:text-4xl">Drone Build</span>
                 </HudTitle>
                 <p className="mt-8 text-base max-w-xl leading-relaxed text-white/70"
                     style={{ fontFamily: "'Rajdhani', sans-serif", fontWeight: 400 }}>
