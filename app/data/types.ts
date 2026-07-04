@@ -1,10 +1,10 @@
-export type Post = {
+export type PostType = {
     id: string;
     date: string;
     title: string;
-    body: string;
-    tags: string[];
-    readTime: number;
+    content: string;
+    author: string;
+    estimated_read_time: number;
 };
 
 export type UserType = {

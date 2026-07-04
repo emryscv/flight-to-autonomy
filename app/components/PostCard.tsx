@@ -1,17 +1,10 @@
 import { Calendar, Clock } from "lucide-react";
-import { Post } from "../data/types";
+import { PostType } from "../data/types";
+import { formatDate, estimateReadTime } from "../helpers";
 
-function formatDate(iso: string): string {
-  return new Date(iso + "T12:00:00").toLocaleDateString("en-US", {
-    year: "numeric", month: "long", day: "numeric",
-  });
-}
-
-
-export function PostCard({ post, onClick }: { post: Post; onClick: () => void }) {
+export function PostCard({ post }: { post: PostType }) {
     return (
-        <article
-            onClick={onClick}
+        <a href={`./post/${post.id}`}
             className="border border-border rounded-md bg-card hover:border-accent transition-colors cursor-pointer group p-5">
             <div className="flex items-center justify-between mb-3 text-xs font-mono text-muted-foreground">
                 <span className="flex items-center gap-1.5">
@@ -20,7 +13,7 @@ export function PostCard({ post, onClick }: { post: Post; onClick: () => void })
                 </span>
                 <span className="flex items-center gap-1.5">
                     <Clock className="w-3 h-3" />
-                    {post.readTime} min read
+                    {post.estimated_read_time} min read
                 </span>
             </div>
 
@@ -33,8 +26,8 @@ export function PostCard({ post, onClick }: { post: Post; onClick: () => void })
             <p
                 className="text-sm text-muted-foreground leading-relaxed line-clamp-2"
                 style={{ fontFamily: "'Rajdhani', sans-serif", fontWeight: 400 }}>
-                {post.body.split("\n")[0]}
+                {post.content.substring(0, 100)}{post.content.length > 100 ? "..." : ""}
             </p>
-        </article>
+        </a>
     );
 }

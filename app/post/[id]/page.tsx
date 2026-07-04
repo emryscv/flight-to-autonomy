@@ -1,12 +1,11 @@
-import { formatDate } from "../helpers";
-import { Post } from "../data/types";
+import { formatDate } from "../../helpers";
+import { PostType } from "../../data/types";
 import { Calendar, ArrowLeft, Clock, Tag } from "lucide-react";
-import bcrypt from "bcrypt";
+import { getPostById } from "@/app/data/queries";
 
-
-export default function PostDetail() {
-    const post: Post = { id: "1", title: "Sample Post", date: "2024-06-01", readTime: 5, body: "This is a sample post body.\n\n- First point\n- Second point", tags: ["sample", "post"] };
-    const onBack = () => { };
+export default async function PostDetail({ params }: { params: { id: string } }) {
+    const { id } = await params;
+    const post: PostType = await getPostById(id);
 
     return (
         <div className="max-w-2xl mx-auto px-6 py-12">
@@ -24,7 +23,7 @@ export default function PostDetail() {
                 </span>
                 <span className="flex items-center gap-1.5">
                     <Clock className="w-3 h-3" />
-                    {post.readTime} min read
+                    {post.estimated_read_time} min read
                 </span>
             </div>
 
@@ -35,7 +34,7 @@ export default function PostDetail() {
             </h1>
 
             <div className="space-y-5">
-                {post.body.split("\n\n").map((para, i) => (
+                {post.content.split("\n\n").map((para, i) => (
                     <p
                         key={i}
                         className="text-sm leading-relaxed text-foreground"
@@ -48,15 +47,6 @@ export default function PostDetail() {
                             )
                             : para}
                     </p>
-                ))}
-            </div>
-
-            <div className="flex flex-wrap gap-2 mt-10 pt-6 border-t border-border">
-                <Tag className="w-3.5 h-3.5 text-muted-foreground mt-0.5" />
-                {post.tags.map(tag => (
-                    <span key={tag} className="text-xs font-mono text-muted-foreground border border-border rounded px-1.5 py-0.5 uppercase">
-                        #{tag}
-                    </span>
                 ))}
             </div>
         </div>

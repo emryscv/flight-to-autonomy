@@ -3,8 +3,11 @@ export function estimateReadTime(body: string): number {
 }
 
 export function formatDate(iso: string): string {
-  return new Date(iso + "T12:00:00").toLocaleDateString("en-US", {
-    year: "numeric", month: "long", day: "numeric",
+  return new Date(iso).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "UTC",
   });
 }
 

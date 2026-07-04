@@ -30,9 +30,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       //style={{ fontFamily: "'Rajdhani', sans-serif" }}
     >
-      <body className="h-full flex flex-col">
+      <body className="h-full flow-root">
         <NavBar />
-        <main className="h-full">
+        <main className="min-h-full">
           {children}
         </main>
         <Footer />
