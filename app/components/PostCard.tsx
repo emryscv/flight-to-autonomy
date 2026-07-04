@@ -1,4 +1,5 @@
 import { Calendar, Clock } from "lucide-react";
+import { Post } from "../data/types";
 
 function formatDate(iso: string): string {
   return new Date(iso + "T12:00:00").toLocaleDateString("en-US", {
@@ -34,14 +35,6 @@ export function PostCard({ post, onClick }: { post: Post; onClick: () => void })
                 style={{ fontFamily: "'Rajdhani', sans-serif", fontWeight: 400 }}>
                 {post.body.split("\n")[0]}
             </p>
-
-            <div className="flex flex-wrap gap-1.5 mt-4">
-                {post.tags.map(tag => (
-                    <span key={tag} className="text-xs font-mono text-muted-foreground border border-border rounded px-1.5 py-0.5 uppercase">
-                        #{tag}
-                    </span>
-                ))}
-            </div>
         </article>
     );
 }

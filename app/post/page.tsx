@@ -2,7 +2,10 @@ import { formatDate } from "../helpers";
 import { Post } from "../data/types";
 import { Calendar, ArrowLeft, Clock, Tag } from "lucide-react";
 
-function PostDetail({ post, onBack }: { post: Post; onBack: () => void }) {
+export default function PostDetail() {
+    const post: Post = { id: "1", title: "Sample Post", date: "2024-06-01", readTime: 5, body: "This is a sample post body.\n\n- First point\n- Second point", tags: ["sample", "post"] };
+    const onBack = () => { };
+
     return (
         <div className="max-w-2xl mx-auto px-6 py-12">
             <button

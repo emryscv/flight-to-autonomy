@@ -110,40 +110,6 @@ export default function AdminCreate({
                         style={{ fontFamily: "'Rajdhani', sans-serif", fontWeight: 400 }}
                     />
                 </div>
-                {/* tags */}
-                <div>
-                    <label className="block text-xs uppercase tracking-widest text-muted-foreground mb-1.5"
-                        style={{ fontFamily: "'Saira Condensed', sans-serif" }}>
-                        Tags
-                    </label>
-                    <div className="flex gap-2">
-                        <input
-                            type="text"
-                            value={tagInput}
-                            onChange={e => setTagInput(e.target.value)}
-                            onKeyDown={e => { if (e.key === "Enter" || e.key === ",") { e.preventDefault(); addTag(); } }}
-                            placeholder="tag name"
-                            className="flex-1 bg-input-background border border-border rounded-md px-4 py-2.5 text-sm font-mono outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-colors"
-                        />
-                        <button onClick={addTag}
-                            className="border border-border px-4 py-2.5 text-xs uppercase tracking-wide rounded-md hover:bg-accent hover:text-black hover:border-accent transition-colors"
-                            style={{ fontFamily: "'Saira Condensed', sans-serif" }}>
-                            Add
-                        </button>
-                    </div>
-                    {tags.length > 0 && (
-                        <div className="flex flex-wrap gap-2 mt-2">
-                            {tags.map(tag => (
-                                <span key={tag} className="flex items-center gap-1 text-xs font-mono border border-border rounded px-1.5 py-0.5 uppercase text-muted-foreground">
-                                    #{tag}
-                                    <button onClick={() => removeTag(tag)} className="hover:text-destructive transition-colors ml-0.5">
-                                        <X className="w-2.5 h-2.5" />
-                                    </button>
-                                </span>
-                            ))}
-                        </div>
-                    )}
-                </div>
 
                 {/* submit */}
                 <div className="pt-2">

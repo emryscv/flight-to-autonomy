@@ -1,4 +1,5 @@
 import { Lock } from "lucide-react";
+import Image from "next/image";
 
 export default function NavBar() {
     return (
@@ -7,7 +8,13 @@ export default function NavBar() {
                 <button
                     //onClick={() => setView({ page: "home" })}
                     className="flex items-center gap-2.5">
-                    <div className="w-6 h-6 bg-accent rounded-sm" />
+                    <Image
+                        src="/droneClubLogo.png"
+                        width="40"
+                        height="40"
+                        alt="Drone Club Logo"
+                        style={{ filter: "invert(100%)" }}
+                    />
                     <span
                         className="text-accent font-bold tracking-[0.2em] text-md uppercase"
                         style={{ fontFamily: "'Orbitron', monospace" }}>

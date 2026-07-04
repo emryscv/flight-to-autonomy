@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
-import style from "styled-jsx/style";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,9 +30,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       //style={{ fontFamily: "'Rajdhani', sans-serif" }}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="h-full flex flex-col">
         <NavBar />
-        <main>
+        <main className="h-full">
           {children}
         </main>
         <Footer />
