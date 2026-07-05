@@ -15,8 +15,8 @@ export default function HeroSection() {
                 </HudTitle>
                 <p className="mt-8 text-base max-w-xl leading-relaxed text-white/70"
                     style={{ fontFamily: "'Rajdhani', sans-serif", fontWeight: 400 }}>
-                    A full documentation log of designing, assembling, and programming a 250mm-class
-                    autonomous quadrotor for the Drone Club capstone. Every failure, fix, and flight recorded.
+                    A full documentation log of designing, and programming an
+                    autonomous quadrotor for Computer Science Capstone Project 2026. Every failure, fix, and flight recorded.
                 </p>
             </div>
         </section>
