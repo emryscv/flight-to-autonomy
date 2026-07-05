@@ -1,15 +1,23 @@
 import postgres from 'postgres';
 import { PostType } from './types';
 
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+const sql = postgres(process.env.POSTGRES_URL!, { 
+    ssl: 'require',
+    max: 3
+});
 
 export async function getPosts() {
     try {
         const posts = await sql<PostType[]>`SELECT * FROM post ORDER BY date DESC`;
+        console.log('Posts fetched successfully:', posts.length);
         return posts;
     } catch (error) {
-        console.error('Failed to fetch posts:', error);
-        throw new Error('Failed to fetch posts.');
+        console.error('Failed to fetch posts - Error details:', {
+            error,
+            message: error instanceof Error ? error.message : String(error),
+            url: process.env.POSTGRES_URL ? 'Set' : 'Not set'
+        });
+        return [];
     }
 }
 
