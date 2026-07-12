@@ -6,17 +6,17 @@ export const authConfig = {
     },
     callbacks: {
         authorized({ auth, request: { nextUrl } }) {
-            const isLoggedIn = !!auth?.user;
-            const isOnDashboard = nextUrl.pathname.startsWith('/admin');
-            const isOnLogin = nextUrl.pathname.startsWith('/login');
+        //     const isLoggedIn = !!auth?.user;
+        //     const isOnDashboard = nextUrl.pathname.startsWith('/admin');
+        //    const isOnLogin = nextUrl.pathname.startsWith('/login');
 
-            if (isOnDashboard) {
-                return isLoggedIn;
-            }
+        //     if (isOnDashboard) {
+        //         return isLoggedIn;
+        //     }
 
-            if (isOnLogin && isLoggedIn) {
-                return Response.redirect(new URL('/admin', nextUrl));
-            }
+        //     if (isOnLogin && isLoggedIn) {
+        //         return Response.redirect(new URL('/admin', nextUrl));
+        //     }
 
             return true;
         },

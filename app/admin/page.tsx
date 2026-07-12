@@ -2,14 +2,17 @@
 import { useState } from "react";
 import { LogOut, Plus } from "lucide-react";
 import { createPostAction, signOutAction } from "../data/actions";
+import BlockEditor from "../components/BlockEditor";
+import { BlockType } from "../data/types";
 
 export default function AdminCreate() {
     const [title, setTitle] = useState("");
-    const [body, setBody] = useState("");
+    const [body, setBody] = useState<BlockType[]>([]);
     const [author, setAuthor] = useState("");
     const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
 
-    const canSubmit = title.trim().length > 0 && body.trim().length > 0 && author.trim().length > 0;
+
+    const canSubmit = title.trim().length > 0 && body.length > 0 && author.trim().length > 0;
 
     return (
         <div className="mx-auto px-6 py-12 max-w-2xl">
@@ -94,7 +97,7 @@ export default function AdminCreate() {
                     />
                 </div>
 
-                <div>
+                {/* <div>
                     <label className="block text-xs uppercase tracking-widest text-muted-foreground mb-1.5"
                         style={{ fontFamily: "'Saira Condensed', sans-serif" }}
                         htmlFor="content">
@@ -113,6 +116,14 @@ export default function AdminCreate() {
                         className="w-full bg-input-background border border-border rounded-md px-4 py-3 text-sm leading-relaxed outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-colors resize-y"
                         style={{ fontFamily: "'Rajdhani', sans-serif", fontWeight: 400 }}
                     />
+                </div> */}
+
+                <div>
+                    <label className="block text-xs uppercase tracking-widest text-muted-foreground mb-3"
+                        style={{ fontFamily: "'Saira Condensed', sans-serif" }}>
+                        Content Blocks
+                    </label>
+                    <BlockEditor blocks={body} onChange={setBody} />
                 </div>
 
                 <div className="pt-2">
