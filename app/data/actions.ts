@@ -49,7 +49,6 @@ export async function createPostAction(formData: FormData) {
                 access: 'private',
                 addRandomSuffix: true,
             });
-            revalidatePath('/');
         }
 
 
@@ -64,6 +63,7 @@ export async function createPostAction(formData: FormData) {
         };
 
         await createPost(post);
+        revalidatePath('/');
     } catch (error) {
         console.error("Error creating post:", error);
         throw error;
