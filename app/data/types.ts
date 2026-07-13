@@ -2,6 +2,7 @@ export type PostType = {
     id: string;
     date: string;
     title: string;
+    image: string;
     content: string;
     author: string;
     estimated_read_time: number;

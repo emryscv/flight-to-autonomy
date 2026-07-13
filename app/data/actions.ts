@@ -4,6 +4,8 @@ import { signIn, signOut } from '@/auth';
 import { AuthError } from 'next-auth';
 import { PostType } from './types';
 import { createPost } from './queries';
+import { revalidatePath } from 'next/cache';
+import { put } from '@vercel/blob';
 
 export async function authenticate(
     prevState: string | undefined,
@@ -37,20 +39,34 @@ export async function createPostAction(formData: FormData) {
     const title = formData.get('title') as string;
     const content = formData.get('content') as string;
     const author = formData.get('author') as string;
+    const image = formData.get('image') as File | null;
 
-    const post: PostType = {
-        id: "-1",
-        date,
-        title,
-        content,
-        author,
-        estimated_read_time: Math.max(1, Math.round(content.split(/\s+/).length / 200)),
-    };
 
     try {
+        let blob;
+        if (image && image.size > 0) {
+            blob = await put(image.name, image, {
+                access: 'private',
+                addRandomSuffix: true,
+            });
+            revalidatePath('/');
+        }
+
+
+        const post: PostType = {
+            id: "-1",
+            date,
+            title,
+            content,
+            author,
+            image: blob?.url ?? '',
+            estimated_read_time: Math.max(1, Math.round(content.split(/\s+/).length / 200)),
+        };
+
         await createPost(post);
     } catch (error) {
         console.error("Error creating post:", error);
         throw error;
     }
 }
+

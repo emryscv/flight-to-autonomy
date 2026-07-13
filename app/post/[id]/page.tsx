@@ -1,12 +1,11 @@
 import { formatDate } from "../../helpers";
 import { PostType } from "../../data/types";
-import { Calendar, ArrowLeft, Clock, Tag } from "lucide-react";
+import { Calendar, ArrowLeft, Clock } from "lucide-react";
 import { getPostById } from "@/app/data/queries";
 
 export default async function PostDetail({ params }: { params: { id: string } }) {
     const { id } = await params;
     const post: PostType = await getPostById(id);
-
     return (
         <div className="max-w-2xl mx-auto px-6 py-12">
             <a
@@ -35,6 +34,10 @@ export default async function PostDetail({ params }: { params: { id: string } })
                 </h1>
                 <p>{post.author}</p>
             </div>
+                        
+            {post.image ? (
+                <img src={`/api/posts/${post.id}/image`} alt={post.title} className="w-full h-auto mb-6" />
+            ) : null}
 
             <div className="space-y-5">
                 {post.content.split("\n\n").map((para, i) => (

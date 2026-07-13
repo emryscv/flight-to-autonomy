@@ -1,14 +1,27 @@
 "use client";
-import { useState } from "react";
-import { LogOut, Plus } from "lucide-react";
+import { useRef, useState } from "react";
+import { Image, LogOut, Plus, X } from "lucide-react";
 import { createPostAction, signOutAction } from "../data/actions";
 
 export default function AdminCreate() {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
     const [author, setAuthor] = useState("");
+    const [picture, setPicture] = useState<File | null>(null);
     const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
 
+    const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            setPicture(file);
+            const url = URL.createObjectURL(file);
+            setPreviewUrl(url);
+        }
+    };
+
+    const fileRef = useRef<HTMLInputElement>(null);
     const canSubmit = title.trim().length > 0 && body.trim().length > 0 && author.trim().length > 0;
 
     return (
@@ -93,6 +106,46 @@ export default function AdminCreate() {
                         style={{ fontFamily: "'Rajdhani', sans-serif" }}
                     />
                 </div>
+
+                <label className="block text-xs uppercase tracking-widest text-muted-foreground mb-1.5"
+                    style={{ fontFamily: "'Saira Condensed', sans-serif" }}
+                    htmlFor="content">
+                    Image
+                </label>
+
+                {previewUrl ? (
+                    <div className="relative">
+                        <img src={previewUrl} alt={"Post hero image"}
+                            className="w-full max-h-80 object-cover" />
+                        <button
+                            type="button"
+                            onClick={() => setPreviewUrl(null)}
+                            className="absolute top-2 right-2 bg-black/60 hover:bg-destructive text-white rounded-sm p-1 transition-colors">
+                            <X className="w-3.5 h-3.5" />
+                        </button>
+                    </div>
+                ) : (
+                    <button
+                        type="button"
+                        onClick={() => fileRef.current?.click()}
+                        className="w-full py-10 flex flex-col items-center gap-2 text-muted-foreground hover:text-accent hover:bg-secondary/30 transition-colors">
+                        <Image className="w-8 h-8" />
+                        <span className="text-xs uppercase tracking-widest"
+                            style={{ fontFamily: "'Saira Condensed', sans-serif" }}>
+                            Click to upload image
+                        </span>
+                    </button>
+                )}
+
+                <input
+                    type="file"
+                    id="image"
+                    name="image"
+                    ref={fileRef}
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    className="hidden"
+                />
 
                 <div>
                     <label className="block text-xs uppercase tracking-widest text-muted-foreground mb-1.5"
